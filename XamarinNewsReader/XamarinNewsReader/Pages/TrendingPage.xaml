@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="XamarinNewsReader.Pages.TrendingPage">
+
+     <!--listview-->
+    <!--<ListView x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding}" Margin="20">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell DetailColor="Gray" TextColor="Black" ImageSource="{Binding ImageUrl}" Text="{Binding Title}" Detail="{Binding Description}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>-->
+    
+    
+    <!--Better listview-->
+    <ListView SeparatorVisibility="None" ItemSelected="newsListView_ItemSelected" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding}" Margin="20"
+              IsRefreshing="false">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+                        <!--Remember that the below plugin usage requires that you put using statement in this here xaml file-->
+                        <controls:CircleImage Grid.RowSpan="3"  WidthRequest="80"  HeightRequest="80" Source="{Binding ImageUrl}" Aspect="AspectFill" />
+
+                        <!--<Image Margin="5" HeightRequest="100" WidthRequest="100" Grid.RowSpan="2" Source="{Binding ImageUrl}" />-->
+
+                        <Label Style="{DynamicResource ListTitleStyle}"  Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
+                        <Label Style="{DynamicResource ListDescriptionStyle}"  Grid.Column="1" Grid.Row="1" Text="TOPIC:"/>
+                        <Label Style="{DynamicResource ListDescriptionStyle}" Grid.Column="1" Grid.Row="2" Text="{Binding Description}"/>
+
+                        <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro" Grid.Column="1" Grid.Row="3" Text="{Binding CreatedDate, StringFormat='UPDATED: {0:dddd h:mm tt} GMT'}" />
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
+
+
