@@ -4,6 +4,7 @@
 # Visual Studio (>=2015) project-specific, machine local files
 .vs/
 
+<<<<<<< HEAD
 
 ### XamarinStudio ###
 bin/
@@ -11,6 +12,8 @@ obj/
 *.userprefs
 .packages
 
+=======
+>>>>>>> f7c9176b525479453121855e072212d36f994ae4
 # User-specific files
 *.suo
 *.user
