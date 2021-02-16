@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             xmlns:Pages="clr-namespace:XamarinNewsReader.Pages"
             xmlns:local="clr-namespace:XamarinNewsReader" Title="Home"
-            x:Class="XamarinNewsReader.MainPage">
+            x:Class="XamarinNewsReader.MainPage"
+            BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Settings" Clicked="OnSettingsClicked" Order="Primary" IconImageSource="settings_icon.png"/>
+        <ToolbarItem Command="{StaticResource NavigateToSettingsCommand}" Text="Settings" Order="Primary" IconImageSource="settings_icon.png"/>
     </TabbedPage.ToolbarItems>
     
     <TabbedPage.Children>

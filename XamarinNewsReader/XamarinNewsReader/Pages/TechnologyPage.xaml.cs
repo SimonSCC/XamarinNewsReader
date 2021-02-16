@@ -19,21 +19,20 @@ namespace XamarinNewsReader.Pages
 
         protected override void OnAppearing()
         {
-            LoadNewsAsync();
-                
+            this.BindingContext = App.ViewModel;
 
             base.OnAppearing();
         }
 
-        private async void LoadNewsAsync()  
-        {
-            newsListView.IsRefreshing = true;
+        //private async void LoadNewsAsync()  
+        //{
+        //    //newsListView.IsRefreshing = true;
 
-            var news = await Helpers.RssFeedHelper.GetNewsByCategory(News.NewsCategoryType.Viden);
+        //    var news = await Helpers.RssFeedHelper.GetNewsByCategory(News.NewsCategoryType.Viden);
 
-            this.BindingContext = news;
+        //    this.BindingContext = news;
 
-            newsListView.IsRefreshing = false;
-        }
+        //    //newsListView.IsRefreshing = false;
+        //}
     }
 }

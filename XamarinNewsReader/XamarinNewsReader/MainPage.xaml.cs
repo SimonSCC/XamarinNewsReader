@@ -28,6 +28,15 @@ namespace XamarinNewsReader
             Plugin.Connectivity.CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged; //Example of plugin usage.
             //This allows us to listen to network connectivity changes.
 
+            if (App.ViewModel == null) // "This is not ultimately what we want to do
+            {
+                App.ViewModel = new ViewModels.MainViewModel();
+            }
+
+            App.MainNavigation = Navigation;
+
+
+            App.ViewModel.RefreshNewsAsync();
 
             base.OnAppearing();
         }
@@ -41,7 +50,7 @@ namespace XamarinNewsReader
 
         private async void OnSettingsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Pages.SettingsPage());
+            await Navigation.PushAsync(new Pages.SettingsPage(), true);
         }
     }
 }

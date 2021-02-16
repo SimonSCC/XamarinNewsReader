@@ -23,22 +23,24 @@ namespace XamarinNewsReader.Pages
 
         protected override void OnAppearing()
         {
-            LoadNewsAsync();
+            this.BindingContext = App.ViewModel;
+
             base.OnAppearing();
         }
 
-        private async void LoadNewsAsync()
-        {
-           newsListView.IsRefreshing = true; //Property on the newsListView, can be accesed in xaml
+        //We no longer does the below, instead we want to bind to a observable collection.
+        //private async void LoadNewsAsync()
+        //{
+        //   //newsListView.IsRefreshing = true; //Property on the newsListView, can be accesed in xaml
 
-            List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.AlleNyheder);
-
-
-            this.BindingContext = news;
+        //    List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.AlleNyheder);
 
 
-            newsListView.IsRefreshing = false;
-        }
+        //    this.BindingContext = news;
+
+
+        //    //newsListView.IsRefreshing = false;
+        //}
 
         private void newsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

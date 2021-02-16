@@ -15,8 +15,8 @@
     
     
     <!--Better listview-->
-    <ListView SeparatorVisibility="None" ItemSelected="newsListView_ItemSelected" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding}" Margin="20"
-              IsRefreshing="false">
+    <ListView IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" ItemSelected="newsListView_ItemSelected" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding AlleNyheder}" Margin="20"
+              >
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

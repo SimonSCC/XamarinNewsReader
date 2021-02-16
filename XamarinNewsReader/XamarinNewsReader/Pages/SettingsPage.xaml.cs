@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinNewsReader.Models;
 
 namespace XamarinNewsReader.Pages
 {
+   
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
@@ -20,15 +23,26 @@ namespace XamarinNewsReader.Pages
         protected override void OnAppearing()
         {
             InitializeSettings();
+
             base.OnAppearing();
         }
 
         private void InitializeSettings()
         {
-            displayNameEntry.Text = "Simon";
-            bioEditor.Text = "Simon is kewl";
+
+            this.BindingContext = App.ViewModel.CurrentUser;
+
+            //displayNameEntry.Text = "Simon";
+            //bioEditor.Text = "Simon is kewl";
             articleCountSlider.Value = 10;
             categoryPicker.SelectedIndex = 1;
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
 }

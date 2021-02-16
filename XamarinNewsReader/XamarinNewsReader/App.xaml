@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:command="clr-namespace:XamarinNewsReader.Common.Commands"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dark="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Dark"
-             xmlns:light="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Light"
              x:Class="XamarinNewsReader.App" >
           
     <Application.Resources>
         
-        
-        
+        <ResourceDictionary Source="Themes/DarkTheme.xaml" />
+
         <ResourceDictionary>
+
+            <command:NavigateToSettingsCommand  x:Key="NavigateToSettingsCommand"/>
 
             <Color x:Key="ListTextColor">#000000</Color>
 
@@ -18,15 +19,46 @@
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="TextColor" Value="{DynamicResource ListTextColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
             </Style>
 
 
             <Style x:Key="ListDescriptionStyle" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Start"/>
-                <Setter Property="TextColor" Value="{DynamicResource ListTextColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
                 <Setter Property="Opacity" Value="0.4"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+            </Style>
+
+            <Style TargetType="Slider">
+                <!--<Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>-->
+
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource ButtonColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="BorderRadius" Value="50"/>
+
             </Style>
 
 
