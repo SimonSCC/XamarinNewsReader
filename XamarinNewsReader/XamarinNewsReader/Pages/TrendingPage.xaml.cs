@@ -46,5 +46,10 @@ namespace XamarinNewsReader.Pages
         {
             //App.Current.Resources["ListTextColor"] = Color.Blue; //Changes text color
         }
+
+        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            new Common.Commands.NavigateToDetailCommand().Execute(e.Item as News.NewsInformation);
+        }
     }
 }

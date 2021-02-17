@@ -42,18 +42,18 @@ namespace XamarinNewsReader.Helpers
 
                 };
 
-                //foreach (SyndicationElementExtension extension in item.ElementExtensions)
-                //{
-                //    XElement element = extension.GetObject<XElement>();
+                foreach (SyndicationElementExtension extension in item.ElementExtensions)
+                {
+                    XElement element = extension.GetObject<XElement>();
 
-                //    string potentialImageLink = element.Value.TrimStart('\n', ' ').TrimEnd('\n', ' ');
+                    string potentialImageLink = element.Value.TrimStart('\n', ' ').TrimEnd('\n', ' ');
 
-                //    if (potentialImageLink.StartsWith("https://") || potentialImageLink.StartsWith("http://") && potentialImageLink.EndsWith(".jpg")
-                //        || potentialImageLink.EndsWith(".png") || potentialImageLink.EndsWith(".gif"))
-                //    {
-                //        newsInfo.ImageUrl = potentialImageLink;
-                //    }
-                //}
+                    if (potentialImageLink.StartsWith("https://") || potentialImageLink.StartsWith("http://") && potentialImageLink.EndsWith(".jpg")
+                        || potentialImageLink.EndsWith(".png") || potentialImageLink.EndsWith(".gif"))
+                    {
+                        newsInfo.ImageUrl = potentialImageLink;
+                    }
+                }
                 //if (resultAsNews.Count == 7) //Try to prevent crash from loading images by only showing 7 articles
                 //{
                 //    return resultAsNews;

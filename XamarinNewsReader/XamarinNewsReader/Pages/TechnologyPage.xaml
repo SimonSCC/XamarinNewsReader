@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinNewsReader.Pages.TechnologyPage">
-    
-    <ListView IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding Viden}" Margin="10">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Technology" Text="Refresh" Order="Primary" IconImageSource="icon_refresh_png"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemTapped="OnItemTapped" IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding Viden}" Margin="10">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -17,12 +21,16 @@
                             <RowDefinition />
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Image Grid.RowSpan="2" VerticalOptions="Start"  WidthRequest="80"  HeightRequest="80" Source="{Binding ImageUrl}" Aspect="Fill" />
+                        <!--<Image Grid.RowSpan="2" VerticalOptions="Start"  WidthRequest="80"  HeightRequest="80" Source="{Binding ImageUrl}" Aspect="Fill" />-->
 
-                        <Label Style="{DynamicResource ListTitleStyle}" Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
-                        <Label Style="{DynamicResource ListDescriptionStyle}" Grid.Column="1" Grid.Row="1" Text="{Binding Description}"/>
+                        <Label  FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
+                                Style="{DynamicResource ListTitleStyle}" Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
+                        
+                        <Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
+                               Style="{DynamicResource ListDescriptionStyle}" Grid.Column="1" Grid.Row="1" Text="{Binding Description}"/>
 
-                        <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro" Grid.Column="1" Grid.Row="2" Text="{Binding CreatedDate, StringFormat='UPDATED: {0:dddd h:mm tt} GMT'}" />
+                        <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro" Grid.Column="1" Grid.Row="2" 
+                               Text="{Binding CreatedDate, Converter={StaticResource AgoLabelConverter}}"/>
 
 
                     </Grid>

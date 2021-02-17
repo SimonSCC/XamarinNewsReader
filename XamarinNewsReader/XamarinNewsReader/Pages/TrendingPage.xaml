@@ -12,10 +12,12 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>-->
-    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Trending" Text="Refresh" Order="Primary" IconImageSource="icon_refresh_png"/>
+    </ContentPage.ToolbarItems>
     
     <!--Better listview-->
-    <ListView IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" ItemSelected="newsListView_ItemSelected" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding AlleNyheder}" Margin="20"
+    <ListView IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" ItemTapped="OnItemTapped" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding AlleNyheder}" Margin="20"
               >
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -33,15 +35,20 @@
 
                         </Grid.RowDefinitions>
                         <!--Remember that the below plugin usage requires that you put using statement in this here xaml file-->
-                        <controls:CircleImage Grid.RowSpan="3"  WidthRequest="80"  HeightRequest="80" Source="{Binding ImageUrl}" Aspect="AspectFill" />
+                        <!--<controls:CircleImage Grid.RowSpan="3"  WidthRequest="80"  HeightRequest="80" Source="{Binding ImageUrl}" Aspect="AspectFill" />-->
 
                         <!--<Image Margin="5" HeightRequest="100" WidthRequest="100" Grid.RowSpan="2" Source="{Binding ImageUrl}" />-->
 
-                        <Label Style="{DynamicResource ListTitleStyle}"  Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
-                        <Label Style="{DynamicResource ListDescriptionStyle}"  Grid.Column="1" Grid.Row="1" Text="TOPIC:"/>
+                        <Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
+                            Style="{DynamicResource ListTitleStyle}"  Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
+
+                        <Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
+                            Style="{DynamicResource ListDescriptionStyle}"  Grid.Column="1" Grid.Row="1" Text="TOPIC:"/>
+                        
                         <Label Style="{DynamicResource ListDescriptionStyle}" Grid.Column="1" Grid.Row="2" Text="{Binding Description}"/>
 
-                        <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro" Grid.Column="1" Grid.Row="3" Text="{Binding CreatedDate, StringFormat='UPDATED: {0:dddd h:mm tt} GMT'}" />
+                        <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro" Grid.Column="1" Grid.Row="3" 
+                               Text="{Binding CreatedDate, Converter={StaticResource AgoLabelConverter}}"/>
 
                     </Grid>
                 </ViewCell>

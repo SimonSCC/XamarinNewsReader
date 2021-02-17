@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:command="clr-namespace:XamarinNewsReader.Common.Commands"
+             xmlns:converters="clr-namespace:XamarinNewsReader.Common.Converters"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinNewsReader.App" >
           
@@ -11,6 +12,10 @@
         <ResourceDictionary>
 
             <command:NavigateToSettingsCommand  x:Key="NavigateToSettingsCommand"/>
+            <command:RefreshNewsCommand  x:Key="RefreshNewsCommand"/>
+
+            <converters:AgoLabelConverter x:Key="AgoLabelConverter"/>
+            <converters:LabelFontWeightConverter x:Key="LabelFontWeightConverter"/>
 
             <Color x:Key="ListTextColor">#000000</Color>
 
@@ -60,6 +65,10 @@
                 <Setter Property="BorderRadius" Value="50"/>
 
             </Style>
+
+            <!--<Style TargetType="ListView">
+                <Setter Property=""
+            </Style>-->
 
 
         </ResourceDictionary>

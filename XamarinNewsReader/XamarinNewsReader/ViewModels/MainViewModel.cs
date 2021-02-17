@@ -83,7 +83,7 @@ namespace XamarinNewsReader.ViewModels
         {
             this.IsBusy = true;
 
-            await RefreshAlleNyheder();
+            await RefreshTrendingNews();
             await RefreshVidenNyheder();
             await RefreshUdlandNyheder();
 
@@ -91,8 +91,10 @@ namespace XamarinNewsReader.ViewModels
 
         }
 
-        private async Task RefreshUdlandNyheder()
+        public async Task RefreshUdlandNyheder()
         {
+            this.Verden.Clear();
+
             List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Udland);
 
             foreach (NewsInformation newsInformation in news)
@@ -102,8 +104,10 @@ namespace XamarinNewsReader.ViewModels
 
         }
 
-        private async Task RefreshVidenNyheder()
+        public async Task RefreshVidenNyheder()
         {
+            this.Viden.Clear();
+
             List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Viden);
 
             foreach (NewsInformation newsInformation in news)
@@ -112,8 +116,10 @@ namespace XamarinNewsReader.ViewModels
             }
         }
 
-        private async Task RefreshAlleNyheder()
+        public async Task RefreshTrendingNews()
         {
+            this.AlleNyheder.Clear();
+
             List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.AlleNyheder);
 
             foreach (NewsInformation newsInformation in news)
