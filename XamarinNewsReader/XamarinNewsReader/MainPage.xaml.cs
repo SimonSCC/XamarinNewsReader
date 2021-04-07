@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XamarinNewsReader.Helpers;
 
 namespace XamarinNewsReader
 {
@@ -38,6 +39,9 @@ namespace XamarinNewsReader
             //var label = Helpers.GeneralHelper.Getlabel();
 
             App.ViewModel.RefreshNewsAsync();
+
+            var appearedFolders = StorageHelper.GetSpecialFolders();
+            var databasePath = StorageHelper.GetLocalFolderPath();
 
             base.OnAppearing();
         }

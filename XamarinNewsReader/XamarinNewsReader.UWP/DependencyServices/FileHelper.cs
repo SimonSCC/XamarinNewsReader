@@ -4,6 +4,7 @@ using Windows.Storage;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System;
+using XamarinNewsReader.Interfaces;
 
 [assembly: Dependency(typeof(FileHelper))]
 namespace XamarinNewsReader.UWP
