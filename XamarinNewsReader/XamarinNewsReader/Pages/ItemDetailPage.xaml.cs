@@ -14,6 +14,12 @@ namespace XamarinNewsReader.Pages
     public partial class ItemDetailPage : ContentPage
     {
         public NewsInformation CurrentArticle { get; set; }
+
+        public ItemDetailPage()
+        {
+            InitializeComponent();
+        }
+
         public ItemDetailPage(NewsInformation currentArticle)
         {
             InitializeComponent();

@@ -35,6 +35,7 @@ namespace XamarinNewsReader
 
             App.MainNavigation = Navigation;
 
+            //var label = Helpers.GeneralHelper.Getlabel();
 
             App.ViewModel.RefreshNewsAsync();
 

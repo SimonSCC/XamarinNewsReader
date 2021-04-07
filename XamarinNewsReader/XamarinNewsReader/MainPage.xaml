@@ -7,13 +7,13 @@
             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Command="{StaticResource NavigateToSettingsCommand}" Text="Settings" Order="Primary" IconImageSource="settings_icon.png"/>
+        <ToolbarItem Command="{StaticResource NavigateToSettingsCommand}" Text="Settings" Order="Primary" IconImageSource="settings_white.png"/>
     </TabbedPage.ToolbarItems>
     
     <TabbedPage.Children>
         
-        <Pages:TrendingPage Icon="icon_trending.png" Title="Alle Nyheder"/>
-        <Pages:WorldPage Icon="icon_world.png" Title="Udland"/>
+        <Pages:TrendingPage Icon="trending_white.png" Title="Alle Nyheder"/>
+        <Pages:WorldPage IconImageSource="world.png" Title="Udland"/>
         <Pages:TechnologyPage Icon="icon_technology.png" Title="Viden"/>
         
     </TabbedPage.Children>  

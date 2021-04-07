@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XamarinNewsReader.Helpers;
+using XamarinNewsReader.Interfaces;
 using XamarinNewsReader.Models;
 using XamarinNewsReader.News;
 
@@ -12,6 +13,25 @@ namespace XamarinNewsReader.ViewModels
 {
     public class MainViewModel : Common.ObervableBase
     {
+        private string _platformLabel;
+        public string PlatformLabel
+        {
+            get { return this._platformLabel; }
+            set { this.SetProperty(ref this._platformLabel, value); }
+        }
+        private string _extendedPlatformLabel;
+        public string ExtendedPlatformLabel
+        {
+            get { return this._extendedPlatformLabel; }
+            set { this.SetProperty(ref this._extendedPlatformLabel, value); }
+        }
+
+        private DeviceOrientations _currentOrientation;
+        public DeviceOrientations CurrentOrientation
+        {
+            get { return this._currentOrientation; }
+            set { this.SetProperty(ref this._currentOrientation, value); }
+        }
         public MainViewModel() //This is so that when we create a new MainViewModel it will have empty collections.
         {
             this.AlleNyheder = new ObservableCollection<News.NewsInformation>();

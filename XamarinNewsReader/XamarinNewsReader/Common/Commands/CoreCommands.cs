@@ -8,10 +8,34 @@ using XamarinNewsReader.News;
 
 namespace XamarinNewsReader.Common.Commands
 {
+    public class SpeakCommand : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            Helpers.GeneralHelper.Speak((string)parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+    }
+
 
     public class NavigateToDetailCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+       public event EventHandler CanExecuteChanged;
 
         public void RaiseCanExecuteChanged()
         {

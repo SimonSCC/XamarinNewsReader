@@ -30,12 +30,21 @@ namespace XamarinNewsReader.Pages
         private void InitializeSettings()
         {
 
-            this.BindingContext = App.ViewModel.CurrentUser;
+            this.BindingContext = App.ViewModel;
 
             //displayNameEntry.Text = "Simon";
             //bioEditor.Text = "Simon is kewl";
             articleCountSlider.Value = 10;
             categoryPicker.SelectedIndex = 1;
+            var label = Helpers.GeneralHelper.Getlabel();
+            var extendedLabel = Helpers.GeneralHelper.Getlabel("Running Paperboy on", true);
+
+            var orientation = Helpers.GeneralHelper.GetOrientation();
+
+            App.ViewModel.PlatformLabel = label;
+            App.ViewModel.ExtendedPlatformLabel = extendedLabel;
+
+            App.ViewModel.CurrentOrientation = orientation;
         }
 
         private void Button_Clicked(object sender, EventArgs e)

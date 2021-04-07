@@ -4,7 +4,7 @@
              x:Class="XamarinNewsReader.Pages.TechnologyPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Technology" Text="Refresh" Order="Primary" IconImageSource="icon_refresh_png"/>
+        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Technology" Text="Refresh" Order="Primary" IconImageSource="icon_refresh.png"/>
     </ContentPage.ToolbarItems>
 
     <ListView ItemTapped="OnItemTapped" IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding Viden}" Margin="10">

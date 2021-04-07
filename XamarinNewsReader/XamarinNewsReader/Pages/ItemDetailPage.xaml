@@ -10,6 +10,8 @@
         <Label VerticalOptions="Start" Margin="0,5" FontSize="Micro"
                          Text="{Binding CreatedDate, StringFormat='UPDATED: {0:dddd h:mm tt} GMT'}" />
 
+        <Button Text="Read Article" Command="{StaticResource SpeakCommand}" CommandParameter="{Binding Title}"/>
+        
     </StackLayout>
 
 </ContentPage>

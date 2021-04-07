@@ -13,7 +13,7 @@
         </ListView.ItemTemplate>
     </ListView>-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Trending" Text="Refresh" Order="Primary" IconImageSource="icon_refresh_png"/>
+        <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Trending" Text="Refresh" Order="Primary" IconImageSource="icon_refresh.png"/>
     </ContentPage.ToolbarItems>
     
     <!--Better listview-->
