@@ -4,10 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using XamarinNewsReader.Extensions;
+using XamarinNewsReader.Models;
 using XamarinNewsReader.News;
 
 namespace XamarinNewsReader.Common.Commands
 {
+    public class ToggleFavoriteCommand : ICommand
+    {
+        private bool _isBusy = false;
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return !_isBusy;
+        }
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        public void Execute(object parameter)
+        {
+            ToggleFavoriteAsync(parameter as News.NewsInformation);
+        }
+
+        private async void ToggleFavoriteAsync(News.NewsInformation article)
+        {
+            this._isBusy = true;
+            this.RaiseCanExecuteChanged();
+            App.ViewModel.IsBusy = true;
+
+            await App.ViewModel.Favorites.AddAsync(await article.AsFavorite("Technology"));
+
+            this._isBusy = false;
+            this.RaiseCanExecuteChanged();
+            App.ViewModel.IsBusy = false;
+
+        }
+    }
+
     public class SpeakCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -53,7 +94,25 @@ namespace XamarinNewsReader.Common.Commands
 
         public void Execute(object parameter)
         {
-            navigateToDetailAsync(parameter as News.NewsInformation);
+            if (parameter.GetType() == typeof(NewsInformation))
+            {
+                navigateToDetailAsync(parameter as NewsInformation);
+            }
+            else if (parameter.GetType() == typeof(FavoriteInformation))
+            {
+                FavoriteInformation paramterAsFavoriteInfo = parameter as FavoriteInformation;
+                NewsInformation convertedInfo = new NewsInformation()
+                {
+                    CreatedDate = paramterAsFavoriteInfo.ArticleDate,
+                    Description = paramterAsFavoriteInfo.Description,
+                    ImageUrl = paramterAsFavoriteInfo.ImageUrl,
+                    Title = paramterAsFavoriteInfo.Title,
+                };
+
+                navigateToDetailAsync(convertedInfo);
+
+            }
+
         }
 
         private async void navigateToDetailAsync(NewsInformation article)

@@ -134,7 +134,9 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="icon_favorites.png" />
     <Content Include="icon_refresh.png" />
+    <Content Include="icon_unfavorite.png" />
     <Content Include="settings_white.png" />
     <Content Include="icon_technology.png" />
     <Content Include="trending_white.png" />
@@ -154,6 +156,9 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.7.335</Version>
     </PackageReference>
     <PackageReference Include="System.ServiceModel.Syndication">
       <Version>5.0.0</Version>

@@ -3,6 +3,7 @@ using System.IO;
 using XamarinNewsReader.iOS;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using XamarinNewsReader.Interfaces;
 
 [assembly: Dependency(typeof(FileHelper))]
 namespace XamarinNewsReader.iOS

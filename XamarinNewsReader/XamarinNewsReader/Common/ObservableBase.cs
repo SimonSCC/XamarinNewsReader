@@ -7,7 +7,7 @@ namespace XamarinNewsReader.Common
     /// <summary>
     /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models.
     /// </summary>
-    public class ObervableBase : INotifyPropertyChanged
+    public class ObservableBase : INotifyPropertyChanged
     {
         /// <summary>
         /// Multicast event for property change notifications.

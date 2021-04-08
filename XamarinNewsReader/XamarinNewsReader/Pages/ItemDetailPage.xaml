@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinNewsReader.Pages.ItemDetailPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{StaticResource ToggleFavoriteCommand}" CommandParameter="{Binding}" Text="Add to Favorites" IconImageSource="icon_favorites.png" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    
     <StackLayout Margin="40">
         <Image VerticalOptions="Center" Source="{Binding ImageUrl}" Aspect="AspectFit"/>
         <Label Style="{DynamicResource ListTitleStyle}" Text="{Binding Title}"/>

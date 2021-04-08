@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XamarinNewsReader.Models
 {
-    public class UserInformation : Common.ObervableBase
+    public class UserInformation : Common.ObservableBase
     {
         private string _displayName;
 

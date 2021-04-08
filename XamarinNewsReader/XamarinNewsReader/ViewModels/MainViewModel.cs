@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XamarinNewsReader.Extensions;
 using XamarinNewsReader.Helpers;
 using XamarinNewsReader.Interfaces;
 using XamarinNewsReader.Models;
@@ -11,7 +12,7 @@ using XamarinNewsReader.News;
 
 namespace XamarinNewsReader.ViewModels
 {
-    public class MainViewModel : Common.ObervableBase
+    public class MainViewModel : Common.ObservableBase
     {
         private string _platformLabel;
         public string PlatformLabel
@@ -37,6 +38,7 @@ namespace XamarinNewsReader.ViewModels
             this.AlleNyheder = new ObservableCollection<News.NewsInformation>();
             this.Verden = new ObservableCollection<News.NewsInformation>();
             this.Viden = new ObservableCollection<News.NewsInformation>();
+            this.Favorites = new FavoritesCollection();
 
             this.CurrentUser = new UserInformation()
             {
@@ -46,6 +48,14 @@ namespace XamarinNewsReader.ViewModels
             };
 
         }
+        //Favorite
+        private FavoritesCollection _favorites;
+        public FavoritesCollection Favorites
+        {
+            get { return this._favorites; }
+            set { this.SetProperty(ref this._favorites, value); }
+        }
+        //End
 
         //AlleNyhder
         private ObservableCollection<News.NewsInformation> _alleNyheder;
@@ -147,6 +157,23 @@ namespace XamarinNewsReader.ViewModels
                 this.AlleNyheder.Add(newsInformation);
             }
 
+        }
+
+        public async Task RefreshFavoritesAsync()
+        {
+            this.IsBusy = true;
+
+            this.Favorites.Clear();
+
+            var favorites = await App.Database.GetItemsAsync();
+
+            foreach (var favorite in favorites)
+            {
+                //YOu could expand here. Technology is hardcoded.
+                this.Favorites.Add(favorite.AsFavorite("Technology"));
+            }
+
+            this.IsBusy = false;
         }
     }
 }
