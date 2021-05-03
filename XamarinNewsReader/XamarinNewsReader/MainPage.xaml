@@ -14,7 +14,8 @@
         
         <Pages:TrendingPage Icon="trending_white.png" Title="Alle Nyheder"/>
         <Pages:WorldPage IconImageSource="world.png" Title="Udland"/>
-        <Pages:TechnologyPage Icon="icon_technology.png" Title="Viden"/>
+        <!--<Pages:TechnologyPage Icon="icon_technology.png" Title="Viden"/>-->
+        <Pages:SearchPage IconImageSource="icon_search.png" Title="Search"/>
         <Pages:FavoritesPage Icon="icon_favorites.png" Title="Favs"/>
 
 

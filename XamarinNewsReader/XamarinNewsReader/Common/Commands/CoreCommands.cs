@@ -150,6 +150,7 @@ namespace XamarinNewsReader.Common.Commands
             this._isBusy = true;
             this.RaiseCanExecuteChanged();
             App.ViewModel.IsBusy = true;
+            //if (string.IsNullOrEmpty(App.ViewModel.SearchQuery)) return;
 
             switch (newsType)
             {
@@ -161,6 +162,9 @@ namespace XamarinNewsReader.Common.Commands
                     break;
                 case "Technology":
                     await App.ViewModel.RefreshVidenNyheder();
+                    break;
+                case "Search":
+                    await App.ViewModel.RefreshSearchResults();
                     break;
             }
 

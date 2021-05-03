@@ -14,6 +14,53 @@ namespace XamarinNewsReader.ViewModels
 {
     public class MainViewModel : Common.ObservableBase
     {
+        private List<string> CovidModeSearchParams = new List<string> { "covid", "covid-19", "johnson & johnson", "corona"};
+
+
+        public MainViewModel() //This is so that when we create a new MainViewModel it will have empty collections.
+        {
+            this.AlleNyheder = new ObservableCollection<News.NewsInformation>();
+            this.Verden = new ObservableCollection<News.NewsInformation>();
+            this.Viden = new ObservableCollection<News.NewsInformation>();
+            this.Favorites = new FavoritesCollection();
+
+            CovidModeActivated = false;
+
+            this.CurrentUser = new UserInformation()
+            {
+                DisplayName = "Simon",
+                BioContent = "Simon is kewl",
+                ProfileImageUrl = "https://i.pravatar.cc/300",
+                
+            };
+
+        }
+
+
+        private bool covidmodeactivated;
+
+        public bool CovidModeActivated
+        {
+            get { return this.covidmodeactivated; }
+            set { this.SetProperty(ref this.covidmodeactivated, value); }
+        }
+
+        private string searchQuery;
+        public string SearchQuery
+        {
+            get { return this.searchQuery; }
+            set { this.SetProperty(ref this.searchQuery, value); }
+        }
+
+        private ObservableCollection<News.NewsInformation> _searchResults;
+        public ObservableCollection<News.NewsInformation> SearchResults
+        {
+            get { return this._searchResults; }
+            set { this.SetProperty(ref this._searchResults, value); }
+        }
+
+
+
         private string _platformLabel;
         public string PlatformLabel
         {
@@ -33,21 +80,7 @@ namespace XamarinNewsReader.ViewModels
             get { return this._currentOrientation; }
             set { this.SetProperty(ref this._currentOrientation, value); }
         }
-        public MainViewModel() //This is so that when we create a new MainViewModel it will have empty collections.
-        {
-            this.AlleNyheder = new ObservableCollection<News.NewsInformation>();
-            this.Verden = new ObservableCollection<News.NewsInformation>();
-            this.Viden = new ObservableCollection<News.NewsInformation>();
-            this.Favorites = new FavoritesCollection();
-
-            this.CurrentUser = new UserInformation()
-            {
-                DisplayName = "Simon",
-                BioContent = "Simon is kewl",
-                ProfileImageUrl = "https://i.pravatar.cc/300",
-            };
-
-        }
+       
         //Favorite
         private FavoritesCollection _favorites;
         public FavoritesCollection Favorites
@@ -124,8 +157,19 @@ namespace XamarinNewsReader.ViewModels
         public async Task RefreshUdlandNyheder()
         {
             this.Verden.Clear();
+            List<NewsInformation> news = null;
 
-            List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Udland);
+            if (this.CovidModeActivated)
+            {
+                news = await RssFeedHelper.SearchAsyncOnSpecificCategoryMultipleQueries(CovidModeSearchParams, NewsCategoryType.Udland);
+
+            }
+            else
+            {
+                news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Udland);
+
+            }
+
 
             foreach (NewsInformation newsInformation in news)
             {
@@ -137,8 +181,18 @@ namespace XamarinNewsReader.ViewModels
         public async Task RefreshVidenNyheder()
         {
             this.Viden.Clear();
+            List<NewsInformation> news = null;
 
-            List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Viden);
+            if (CovidModeActivated)
+            {
+                news = await RssFeedHelper.SearchAsyncOnSpecificCategoryMultipleQueries(CovidModeSearchParams, NewsCategoryType.Viden);
+            }
+            else
+            {
+                news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.Viden);
+            }
+
+      
 
             foreach (NewsInformation newsInformation in news)
             {
@@ -149,8 +203,17 @@ namespace XamarinNewsReader.ViewModels
         public async Task RefreshTrendingNews()
         {
             this.AlleNyheder.Clear();
+            List<NewsInformation> news = null;
 
-            List<NewsInformation> news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.AlleNyheder);
+
+            if (CovidModeActivated)
+            {
+                news = await RssFeedHelper.SearchAsyncOnSpecificCategoryMultipleQueries(CovidModeSearchParams, NewsCategoryType.AlleNyheder);
+            }
+            else
+            {
+                news = await RssFeedHelper.GetNewsByCategory(NewsCategoryType.AlleNyheder);
+            }
 
             foreach (NewsInformation newsInformation in news)
             {
@@ -171,6 +234,32 @@ namespace XamarinNewsReader.ViewModels
             {
                 //YOu could expand here. Technology is hardcoded.
                 this.Favorites.Add(favorite.AsFavorite("Technology"));
+            }
+
+            this.IsBusy = false;
+        }
+
+        public async Task RefreshSearchResults()
+        {
+            this.IsBusy = true;
+
+            if (SearchResults != null)
+            {
+                this.SearchResults.Clear();
+            }
+
+            string query = this.SearchQuery;
+
+            var news = await RssFeedHelper.SearchAsync(query);
+
+         
+            if (this.SearchResults == null)
+            {
+               this.SearchResults = new ObservableCollection<NewsInformation>();
+            }
+            foreach (var item in news)
+            {
+                this.SearchResults.Add(item);
             }
 
             this.IsBusy = false;

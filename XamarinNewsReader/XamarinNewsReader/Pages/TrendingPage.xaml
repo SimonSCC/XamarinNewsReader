@@ -42,8 +42,8 @@
                         <Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
                             Style="{DynamicResource ListTitleStyle}"  Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
 
-                        <Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
-                            Style="{DynamicResource ListDescriptionStyle}"  Grid.Column="1" Grid.Row="1" Text="TOPIC:"/>
+                        <!--<Label FontAttributes="{Binding Description, Converter={StaticResource LabelFontWeightConverter}}"
+                            Style="{DynamicResource ListDescriptionStyle}"  Grid.Column="1" Grid.Row="1"/>-->
                         
                         <Label Style="{DynamicResource ListDescriptionStyle}" Grid.Column="1" Grid.Row="2" Text="{Binding Description}"/>
 

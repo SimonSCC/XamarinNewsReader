@@ -77,7 +77,12 @@
     <Compile Include="DependencyServices\FileHelper.cs" />
     <Compile Include="DependencyServices\PlatformLabel.cs" />
     <Compile Include="DependencyServices\TextSpeecher.cs" />
+    <Compile Include="Effects\FocusEffect.cs" />
+    <Compile Include="Effects\FontEffect.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\AccentButtonColorRenderer.cs" />
+    <Compile Include="Renderers\CircleImageRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashActivity.cs" />
@@ -209,6 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

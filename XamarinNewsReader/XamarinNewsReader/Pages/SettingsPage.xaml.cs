@@ -47,7 +47,7 @@ namespace XamarinNewsReader.Pages
             App.ViewModel.CurrentOrientation = orientation;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void SaveButtonClicked(object sender, EventArgs e)
         {
 
         }

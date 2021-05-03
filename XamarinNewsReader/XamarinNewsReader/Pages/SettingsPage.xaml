@@ -19,7 +19,7 @@
             <Entry Text="{Binding CurrentUser.DisplayName, Mode=TwoWay}"/>
             <controls:CircleImage WidthRequest="100"  HeightRequest="100" Source="{Binding CurrentUser.ProfileImageUrl}" Aspect="AspectFit" />
 
-        
+
             <!--Below is plugin for round image-->
 
 
@@ -37,7 +37,11 @@
                     <x:String>World</x:String>
                 </Picker.Items>
             </Picker>
-            <Button Text="Save" Clicked="Button_Clicked"/>
+
+                <Label Style="{DynamicResource SubtitleStyle}" Text="Covid Mode: Only show Covid news "/>
+                <CheckBox IsChecked="{Binding CovidModeActivated}"/>
+
+            <Button Margin="0, 15, 0, 0" Text="Save" Clicked="SaveButtonClicked"/>
 
             <Label Style="{x:DynamicResource SubtitleStyle}" Text="Device orientation:"/>
             <Label FontAttributes="Bold" Style="{x:DynamicResource SubtitleStyle}" Text="{Binding CurrentOrientation}"/>

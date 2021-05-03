@@ -1,13 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinNewsReader.Pages.TechnologyPage">
+             x:Class="XamarinNewsReader.Pages.TechnologyPage"
+             xmlns:local="clr-namespace:XamarinNewsReader">    
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{StaticResource RefreshNewsCommand}" CommandParameter="Technology" Text="Refresh" Order="Primary" IconImageSource="icon_refresh.png"/>
     </ContentPage.ToolbarItems>
 
-    <ListView ItemTapped="OnItemTapped" IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding Viden}" Margin="10">
+    <ListView IsRefreshing="{Binding IsBusy}" SeparatorVisibility="None" x:Name="newsListView" HasUnevenRows="True" ItemsSource="{Binding Viden}" Margin="10">
+        <ListView.Behaviors>
+            <local:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{StaticResource NavigateToDetailCommand}"
+                Converter="{StaticResource SelectedItemConverter}"/>
+        </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

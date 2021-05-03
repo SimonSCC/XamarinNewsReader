@@ -23,10 +23,10 @@ namespace XamarinNewsReader.Pages
 
             base.OnAppearing();
         }
-        private void OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            new Common.Commands.NavigateToDetailCommand().Execute(e.Item as News.NewsInformation);
-        }
+        //private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    new Common.Commands.NavigateToDetailCommand().Execute(e.Item as News.NewsInformation);
+        //}
 
         //private async void LoadNewsAsync()  
         //{

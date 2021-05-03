@@ -4,11 +4,12 @@
              x:Class="XamarinNewsReader.Pages.ItemDetailPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <ContentPage.ToolbarItems>
+        <ContentPage.ToolbarItems>
         <ToolbarItem Command="{StaticResource ToggleFavoriteCommand}" CommandParameter="{Binding}" Text="Add to Favorites" IconImageSource="icon_favorites.png" Order="Secondary"/>
     </ContentPage.ToolbarItems>
-    
-    <StackLayout Margin="40">
+    <ScrollView>
+
+        <StackLayout Margin="40">
         <Image VerticalOptions="Center" Source="{Binding ImageUrl}" Aspect="AspectFit"/>
         <Label Style="{DynamicResource ListTitleStyle}" Text="{Binding Title}"/>
         <Label Style="{DynamicResource ListDescriptionStyle}" Text="{Binding Description}"/>
@@ -16,7 +17,9 @@
                          Text="{Binding CreatedDate, StringFormat='UPDATED: {0:dddd h:mm tt} GMT'}" />
 
         <Button Text="Read Article" Command="{StaticResource SpeakCommand}" CommandParameter="{Binding Title}"/>
-        
+
     </StackLayout>
+        
+    </ScrollView>
 
 </ContentPage>

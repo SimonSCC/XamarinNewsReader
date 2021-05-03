@@ -15,9 +15,13 @@
             <command:RefreshNewsCommand  x:Key="RefreshNewsCommand"/>
             <command:SpeakCommand x:Key="SpeakCommand"/>
             <command:ToggleFavoriteCommand x:Key="ToggleFavoriteCommand"/>
+            <command:NavigateToDetailCommand x:Key="NavigateToDetailCommand"/>
+
 
             <converters:AgoLabelConverter x:Key="AgoLabelConverter"/>
             <converters:LabelFontWeightConverter x:Key="LabelFontWeightConverter"/>
+            <converters:SelectedItemConverter x:Key="SelectedItemConverter"/>
+
 
             <Color x:Key="ListTextColor">#000000</Color>
 
@@ -39,6 +43,12 @@
 
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+            </Style>
+
+
+            <Style TargetType="CheckBox">
+                <Setter Property="Color" Value="{DynamicResource PrimaryTextColor}"/>
+
             </Style>
 
             <Style TargetType="Editor">

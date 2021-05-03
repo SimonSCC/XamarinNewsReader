@@ -62,10 +62,77 @@ namespace XamarinNewsReader.Helpers
                 resultAsNews.Add(newsInfo);
             }
 
-            return resultAsNews;
+
+            //Sort on timestamp
+            return resultAsNews.OrderByDescending(o => o.CreatedDate).ToList();
 
 
 
+        }
+
+        public static async Task<List<NewsInformation>> SearchAsyncOnSpecificCategoryMultipleQueries(List<string> searchQueries, NewsCategoryType category)
+        {
+            List<NewsInformation> matchingNews = new List<NewsInformation>();
+
+
+            for (int i = 0; i < searchQueries.Count; i++)
+            {
+                Console.WriteLine(searchQueries[i]);
+                searchQueries[i] = searchQueries[i].ToLower();
+
+
+                List<NewsInformation> news = await GetNewsByCategory(category);
+                foreach (NewsInformation article in news)
+                {
+                    if (article.Title.ToLower().Contains(searchQueries[i]) || article.Description.ToLower().Contains(searchQueries[i]))
+                    {
+                        if (!DoesArticleAlreadyExistInMatch(ref matchingNews, article))
+                        {
+                            matchingNews.Add(article);
+
+                        }
+                    }
+                }
+            }
+
+
+            return matchingNews.OrderByDescending(o => o.CreatedDate).ToList();
+        }
+
+        public static async Task<List<NewsInformation>> SearchAsync(string searchQuery)
+        {
+            List<NewsInformation> matchingNews = new List<NewsInformation>();
+
+            searchQuery = searchQuery.ToLower();
+
+            foreach (NewsCategoryType categoryType in Enum.GetValues(typeof(NewsCategoryType)))
+            {
+
+                List<NewsInformation> fromMethod = await SearchAsyncOnSpecificCategoryMultipleQueries(new List<string> { searchQuery }, categoryType);
+               
+                foreach (NewsInformation item in fromMethod)
+                {
+                    if (!DoesArticleAlreadyExistInMatch(ref matchingNews, item))
+                    {
+                        matchingNews.Add(item);
+                    }
+                }
+
+            }
+
+            return matchingNews.OrderByDescending(o => o.CreatedDate).ToList();
+        }
+
+        private static bool DoesArticleAlreadyExistInMatch(ref List<NewsInformation> matchingNews, NewsInformation article)
+        {
+            foreach (NewsInformation item in matchingNews)
+            {
+                if (item.Title == article.Title)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         //internal async static Task<List<NewsInformation>> GetByCategoryAsync(NewsCategoryType scienceAndTechnology)
