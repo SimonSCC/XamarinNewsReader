@@ -8,6 +8,7 @@
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem Command="{StaticResource NavigateToSettingsCommand}" Text="Settings" Order="Primary" IconImageSource="settings_white.png"/>
+        <ToolbarItem Command="{StaticResource NavigateToFiltersCommand}" Text="Filters" Order="Primary" IconImageSource="filter.png"/>
     </TabbedPage.ToolbarItems>
     
     <TabbedPage.Children>

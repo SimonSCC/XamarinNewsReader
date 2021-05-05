@@ -38,8 +38,7 @@
                 </Picker.Items>
             </Picker>
 
-                <Label Style="{DynamicResource SubtitleStyle}" Text="Covid Mode: Only show Covid news "/>
-                <CheckBox IsChecked="{Binding CovidModeActivated}"/>
+              
 
             <Button Margin="0, 15, 0, 0" Text="Save" Clicked="SaveButtonClicked"/>
 

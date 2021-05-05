@@ -203,4 +203,64 @@ namespace XamarinNewsReader.Common.Commands
         }
 
     }
+
+    public class NavigateToFiltersCommand : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            NavigateAsync();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        private async void NavigateAsync()
+        {
+            await App.MainNavigation.PushAsync(new Pages.FilterPage(), true);
+        }
+    }
+
+
+
+    public class NavigateToAddFilterPageCommand : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            NavigateAsync();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        private async void NavigateAsync()
+        {
+            await App.MainNavigation.PushAsync(new Pages.AddFilterPage(), true);
+        }
+    }
 }

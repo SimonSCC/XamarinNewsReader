@@ -8,6 +8,7 @@ using XamarinNewsReader.News;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Threading.Tasks;
+using XamarinNewsReader.Models;
 
 namespace XamarinNewsReader.Helpers
 {
@@ -70,34 +71,80 @@ namespace XamarinNewsReader.Helpers
 
         }
 
-        public static async Task<List<NewsInformation>> SearchAsyncOnSpecificCategoryMultipleQueries(List<string> searchQueries, NewsCategoryType category)
+        public static async Task<List<NewsInformation>> SearchAsyncOnSpecificCategoryWithFilters(FilterHelper filterHelper, NewsCategoryType category)
         {
             List<NewsInformation> matchingNews = new List<NewsInformation>();
+            List<NewsInformation> news = await GetNewsByCategory(category);
 
-
-            for (int i = 0; i < searchQueries.Count; i++)
+            if (filterHelper.IsPositiveFiltersActive)
             {
-                Console.WriteLine(searchQueries[i]);
-                searchQueries[i] = searchQueries[i].ToLower();
-
-
-                List<NewsInformation> news = await GetNewsByCategory(category);
-                foreach (NewsInformation article in news)
+                foreach (Filter filter in filterHelper.AllActivePositiveFilteredWords)
                 {
-                    if (article.Title.ToLower().Contains(searchQueries[i]) || article.Description.ToLower().Contains(searchQueries[i]))
-                    {
-                        if (!DoesArticleAlreadyExistInMatch(ref matchingNews, article))
-                        {
-                            matchingNews.Add(article);
+                    UseFilter(filter, ref matchingNews, ref news);
+                }
+            }
+            else
+            {
+                matchingNews = news;
+            }
 
-                        }
+
+            //Filter off NegativeFilteredWords
+            if (filterHelper.IsNegativeFiltersActive)
+            {
+                foreach (Filter filter in filterHelper.AllActiveNegativeFilteredWords)
+                {
+                    List<NewsInformation> newsToRemove = UseFilter(filter, ref matchingNews, ref news);
+                    foreach (NewsInformation newsInformation in newsToRemove)
+                    {
+                        matchingNews.Remove(newsInformation);
                     }
                 }
             }
 
-
+            
             return matchingNews.OrderByDescending(o => o.CreatedDate).ToList();
         }
+
+
+
+        private static List<NewsInformation> UseFilter(Filter filter, ref List<NewsInformation> matchingNews, ref List<NewsInformation> news)
+        {
+            List<NewsInformation> newsToRemove = new List<NewsInformation>();
+
+            for (int i = 0; i < filter.FilteredWords.Count; i++)
+            {
+                Console.WriteLine(filter.FilteredWords[i]);
+                filter.FilteredWords[i] = filter.FilteredWords[i].ToLower();
+
+
+                //List<NewsInformation> news = await GetNewsByCategory(category);
+                foreach (NewsInformation article in news)
+                {
+                    if (article.Title.ToLower().Contains(filter.FilteredWords[i]) || article.Description.ToLower().Contains(filter.FilteredWords[i]))
+                    {
+
+                        if (filter.PositiveOrNegative == PositiveOrNegative.Positive)
+                        {
+                            if (!DoesArticleAlreadyExistInMatch(ref matchingNews, article))
+                            {
+                                matchingNews.Add(article);
+                            }
+                        }
+                        else
+                        {
+                            newsToRemove.Add(article);
+                            //matchingNews.Remove(article); //Maybe override equals in newsinformation
+                        }
+
+
+                    }
+                }
+            }
+            return newsToRemove;
+        }
+
+
 
         public static async Task<List<NewsInformation>> SearchAsync(string searchQuery)
         {
@@ -107,9 +154,10 @@ namespace XamarinNewsReader.Helpers
 
             foreach (NewsCategoryType categoryType in Enum.GetValues(typeof(NewsCategoryType)))
             {
+                FilterHelper searchFilter = new FilterHelper();
+                searchFilter.AllActivePositiveFilteredWords.Add(new Filter("SearchQuery", "", PositiveOrNegative.Positive, new List<string> { searchQuery }));
+                List<NewsInformation> fromMethod = await SearchAsyncOnSpecificCategoryWithFilters(searchFilter, categoryType);
 
-                List<NewsInformation> fromMethod = await SearchAsyncOnSpecificCategoryMultipleQueries(new List<string> { searchQuery }, categoryType);
-               
                 foreach (NewsInformation item in fromMethod)
                 {
                     if (!DoesArticleAlreadyExistInMatch(ref matchingNews, item))

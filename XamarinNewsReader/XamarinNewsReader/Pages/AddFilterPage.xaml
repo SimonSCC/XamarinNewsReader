@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinNewsReader.Pages.AddFilterPage"
+             Title="Add Filter"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ScrollView>
+        <StackLayout Margin="40">
+            <Label Style="{DynamicResource TitleStyle}" Text="Filter Creator"/>
+            <Entry x:Name="NameEntry" Placeholder="Name of your filter"></Entry>
+
+            <StackLayout Orientation="Vertical" RadioButtonGroup.GroupName="positiveOrNegative" BackgroundColor="{DynamicResource PrimaryColor}" Margin="0, 10, 0, 10">
+                <Label Style="{DynamicResource SubtitleStyle}" Text="A positive filter will only show news where the words are included in the description or title. 
+                   Negative filters will hide news."/>
+                <RadioButton x:Name="positiveCheck" Content="Positive filter" IsChecked="True" ></RadioButton>
+                <RadioButton x:Name="negativeCheck" Content="Negative filter" IsChecked="False" ></RadioButton>
+            </StackLayout>
+
+            <Entry x:Name="entryDesc" MaxLength="50" Placeholder="Description of your filter"></Entry>
+
+            <Editor x:Name="wordList" HeightRequest="160" Placeholder="The words you want to filter seperated by commas"/>
+
+
+            <Button Clicked="AddFilter_Click" Text="Add Filter"></Button>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

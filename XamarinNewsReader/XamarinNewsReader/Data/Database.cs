@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XamarinNewsReader.Models;
+
 
 namespace XamarinNewsReader.Data
 {
@@ -26,7 +28,40 @@ namespace XamarinNewsReader.Data
 
             database.CreateTableAsync<NewsCategory>().Wait();
             database.CreateTableAsync<Favorite>().Wait();
+
+            database.CreateTableAsync<Filter>().Wait();
         }
+        //Filter Handler:
+        public Task<List<Filter>> GetAllFilters()
+        {
+            return database.Table<Filter>().ToListAsync();
+        }
+        public Task<Filter> GetFilterAsync(int id)
+        {            
+            return database.Table<Filter>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        }
+        public Task<int> SaveFilterAsync(Filter item)
+        {
+            if (item.Id != 0) //PrimaryKey is generated in the database
+            {
+                return database.UpdateAsync(item);
+            }
+            else
+            {
+                return database.InsertAsync(item);
+            }
+        }
+        public Task<int> DeleteFilterAsync(Filter item)
+        {
+            return database.DeleteAsync(item); //return rows of deleted items
+        }
+
+
+
+
+
+
+
 
         public Task<List<NewsCategory>> GetCategoriesAsync()
         {

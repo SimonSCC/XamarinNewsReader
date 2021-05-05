@@ -16,6 +16,8 @@
             <command:SpeakCommand x:Key="SpeakCommand"/>
             <command:ToggleFavoriteCommand x:Key="ToggleFavoriteCommand"/>
             <command:NavigateToDetailCommand x:Key="NavigateToDetailCommand"/>
+            <command:NavigateToFiltersCommand x:Key="NavigateToFiltersCommand"/>
+            <command:NavigateToAddFilterPageCommand x:Key="NavigateToAddFilterPageCommand"/>
 
 
             <converters:AgoLabelConverter x:Key="AgoLabelConverter"/>
@@ -33,7 +35,7 @@
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
             </Style>
 
-
+               
             <Style x:Key="ListDescriptionStyle" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Start"/>
@@ -51,9 +53,16 @@
 
             </Style>
 
+            <Style TargetType="RadioButton">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+
+            </Style>
+            
             <Style TargetType="Editor">
                 <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderTextColor}"/>
             </Style>
 
             <Style TargetType="Picker">
@@ -64,6 +73,7 @@
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderTextColor}"/>
             </Style>
 
             <Style TargetType="Slider">
