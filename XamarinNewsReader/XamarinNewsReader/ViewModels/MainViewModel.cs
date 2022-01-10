@@ -21,7 +21,7 @@ namespace XamarinNewsReader.ViewModels
             this.AlleNyheder = new ObservableCollection<News.NewsInformation>();
             this.Verden = new ObservableCollection<News.NewsInformation>();
             this.Viden = new ObservableCollection<News.NewsInformation>();
-            this.Favorites = new FavoritesCollection();
+            this.Favorites = new FavoritesCollection(); 
             _filterHelper = new FilterHelper();
 
             //CovidModeActivated = false;

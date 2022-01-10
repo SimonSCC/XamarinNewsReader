@@ -31,16 +31,18 @@ namespace XamarinNewsReader.Models
             }
             set { filteredWords = value; }
         }
+        public string FilteredWordsDB { get; set; }
+
+
+        public string Description { get; set; }
+
 
         private List<string> FilteredDBStringToList()
         {
             return FilteredWordsDB.Split(',').ToList();
         }
 
-        public string FilteredWordsDB { get; set; }
-
-
-        public string Description { get; set; }
+  
 
         public Filter()
         {

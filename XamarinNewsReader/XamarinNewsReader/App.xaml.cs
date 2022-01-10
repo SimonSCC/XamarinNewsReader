@@ -16,7 +16,8 @@ namespace XamarinNewsReader
             {
                 if (database == null)
                 {
-                    database = new FavoritesDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("Favorites.db3")); //Favorites.db3 can be named anything
+                    //Selve dependency injection sker her
+                    database = new FavoritesDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("Favorites.db3")); //Favorites.db3 can be named anything 
                 }
                 return database;
             }
